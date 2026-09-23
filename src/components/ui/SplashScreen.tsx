@@ -41,7 +41,7 @@ export default function SplashScreen() {
         </div>
       </div>
 
-      <h1 className="mt-8 text-3xl font-black bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-primary-400 animate-pulse">
+      <h1 className="mt-8 text-4xl font-matcha font-black bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-primary-400 animate-pulse">
         KuduSehat
       </h1>
       <p className="mt-2 text-slate-500 font-medium">Tunggu ya Dad & Moms...</p>
