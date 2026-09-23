@@ -22,7 +22,7 @@ export async function POST(req: Request) {
     }
 
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const systemInstruction = `Kamu adalah "Dokter AI", seorang asisten dokter spesialis anak di aplikasi KuduSehat.
 Tugas kamu adalah menjawab pertanyaan orang tua (Bunda/Ayah) mengenai kesehatan, tumbuh kembang, dan nutrisi anak.
