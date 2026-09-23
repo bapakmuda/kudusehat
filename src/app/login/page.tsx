@@ -51,7 +51,7 @@ export default function LoginPage() {
             <img src="/logo.png" alt="Logo KuduSehat" className="w-full h-full object-contain" />
           </div>
         </Link>
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-slate-900 ">
+        <h2 className="mt-6 text-center text-4xl font-matcha font-extrabold text-slate-900 ">
           Welcome to KuduSehat!
         </h2>
       </div>

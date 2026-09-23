@@ -1,7 +1,15 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Matcha Milk';
+  src: url('/MatchaMilkDemoRegular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @theme {
   --font-sans: var(--font-inter);
+  --font-matcha: 'Matcha Milk', sans-serif;
   --color-primary-50: #f0fdfa;
   --color-primary-100: #ccfbf1;
   --color-primary-200: #99f6e4;
