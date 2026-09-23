@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npx prisma db push && npm run seed && next build",
+    "seed": "node prisma/seed.js",
     "start": "next start",
     "lint": "eslint",
     "postinstall": "prisma skills sync || exit 0"
