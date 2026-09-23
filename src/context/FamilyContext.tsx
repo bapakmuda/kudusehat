@@ -270,7 +270,13 @@ export function FamilyProvider({ children: reactChildren }: { children: React.Re
       body: JSON.stringify(med),
     });
     const newMed = await res.json();
-    setMedications((prev) => [...prev, { ...newMed, medicationName: newMed.medicationName || newMed.name }]);
+    setMedications((prev) => {
+      const exists = prev.find(m => m.id === newMed.id);
+      if (exists) {
+        return prev.map(m => m.id === newMed.id ? { ...newMed, medicationName: newMed.medicationName || newMed.name } : m);
+      }
+      return [...prev, { ...newMed, medicationName: newMed.medicationName || newMed.name }];
+    });
   };
 
   const updateMedication = async (id: string, med: Omit<Medication, "id" | "status" | "childId" | "givenCount">) => {

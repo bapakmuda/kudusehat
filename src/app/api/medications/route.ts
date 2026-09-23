@@ -8,6 +8,29 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
+  const nameToUse = body.medicationName || body.name;
+
+  const existing = await prisma.medication.findFirst({
+    where: {
+      childId: body.childId,
+      name: nameToUse,
+    }
+  });
+
+  if (existing) {
+    // If medication exists, just increase its givenCount and update the schedule time
+    const updated = await prisma.medication.update({
+      where: { id: existing.id },
+      data: {
+        givenCount: (existing.givenCount ?? 0) + 1,
+        status: "Diberikan",
+        scheduleTime: body.scheduleTime || existing.scheduleTime,
+        dosage: body.dosage || existing.dosage,
+      },
+    });
+    return NextResponse.json(updated, { status: 200 });
+  }
+
   const med = await prisma.medication.create({
     data: {
       childId: body.childId,
