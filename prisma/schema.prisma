@@ -1,0 +1,121 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Child {
+  id        String   @id @default(cuid())
+  name      String
+  birthDate String
+  gender    String
+  weight    String?
+  createdAt DateTime @default(now())
+
+  temperatureLogs  TemperatureLog[]
+  symptomLogs      SymptomLog[]
+  medications      Medication[]
+  foodLogs         FoodLog[]
+  consultationLogs ConsultationLog[]
+}
+
+model TemperatureLog {
+  id          String   @id @default(cuid())
+  childId     String
+  temperature Float
+  date        String
+  time        String
+  indication  String
+  createdAt   DateTime @default(now())
+
+  child Child @relation(fields: [childId], references: [id], onDelete: Cascade)
+}
+
+model SymptomLog {
+  id       String   @id @default(cuid())
+  childId  String
+  symptom  String
+  severity String
+  date     String
+  time     String
+  notes    String?
+  createdAt DateTime @default(now())
+
+  child Child @relation(fields: [childId], references: [id], onDelete: Cascade)
+}
+
+model Medication {
+  id           String   @id @default(cuid())
+  childId      String
+  name         String
+  medicationName String?
+  type         String?
+  dosage       String
+  instructions String
+  scheduleTime String
+  status       String   @default("Belum Diberikan")
+  givenCount   Int      @default(0)
+  frequency    Int      @default(1)
+  createdAt    DateTime @default(now())
+
+  child Child @relation(fields: [childId], references: [id], onDelete: Cascade)
+}
+
+model FoodLog {
+  id        String   @id @default(cuid())
+  childId   String
+  foodName  String
+  date      String
+  time      String
+  notes     String?
+  createdAt DateTime @default(now())
+
+  child Child @relation(fields: [childId], references: [id], onDelete: Cascade)
+}
+
+model ConsultationLog {
+  id        String   @id @default(cuid())
+  childId   String
+  sender    String
+  text      String
+  timestamp String
+  createdAt DateTime @default(now())
+
+  child Child @relation(fields: [childId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  password  String
+  role      String   @default("parent")
+  createdAt DateTime @default(now())
+
+  notificationSetting NotificationSetting?
+  notifications       Notification[]
+}
+
+model NotificationSetting {
+  id         String   @id @default(cuid())
+  userId     String   @unique
+  webPush    Boolean  @default(true)
+  whatsapp   Boolean  @default(false)
+  quietHours Boolean  @default(false)
+  
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String   // reminder, alert, system
+  title     String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
