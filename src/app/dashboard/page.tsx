@@ -50,7 +50,7 @@ export default function DashboardOverview() {
     <div className="p-4 md:p-6 lg:p-8 flex flex-col h-[calc(100vh-90px)] md:h-[calc(100vh-40px)] animate-in fade-in duration-500 w-full overflow-hidden">
       <header className="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-4 mb-4 md:mb-8 shrink-0">
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">Dashboard</h1>
+          <h1 className="text-3xl md:text-4xl font-matcha font-bold text-slate-900 tracking-tight">Dashboard</h1>
           <p className="text-xs md:text-sm text-slate-500 mt-1">Pantau kondisi kesehatan seluruh anak secara bersamaan.</p>
         </div>
         <div className="flex gap-2">
