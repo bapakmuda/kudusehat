@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npx prisma db push && npm run seed && next build --webpack",
+    "build": "npx prisma db push && npm run seed && next build --webpack && cp -r prisma .next/standalone/",
     "seed": "node prisma/seed.js",
     "start": "next start",
     "lint": "eslint",
