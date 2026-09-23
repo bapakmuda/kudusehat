@@ -22,7 +22,7 @@ export async function POST(req: Request) {
     }
 
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const systemInstruction = `Kamu adalah "Dokter AI", seorang asisten dokter spesialis anak di aplikasi KuduSehat.
 Tugas kamu adalah menjawab pertanyaan orang tua (Bunda/Ayah) mengenai kesehatan, tumbuh kembang, dan nutrisi anak.
@@ -79,7 +79,7 @@ Tinggi Badan: ${childContext.height ? childContext.height + " cm" : "Tidak diket
   } catch (error: any) {
     console.error("Gemini API Error:", error);
     return NextResponse.json(
-      { error: "Terjadi kesalahan saat menghubungi layanan Dokter AI." },
+      { error: "Terjadi kesalahan: " + (error.message || String(error)) },
       { status: 500 }
     );
   }
