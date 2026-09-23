@@ -52,7 +52,7 @@ export default function LoginPage() {
           </div>
         </Link>
         <h2 className="mt-6 text-center text-4xl font-matcha font-extrabold text-slate-900 ">
-          Welcome to KuduSehat!
+          Welcome to KuduSehat
         </h2>
       </div>
 

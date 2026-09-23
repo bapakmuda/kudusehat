@@ -20,7 +20,7 @@ export default function DashboardOverview() {
   const calculateAge = (dateString: string) => {
     const birthDate = new Date(dateString);
     const today = new Date();
-    
+
     if (today < birthDate) return "Belum lahir";
 
     let years = today.getFullYear() - birthDate.getFullYear();
@@ -50,7 +50,7 @@ export default function DashboardOverview() {
     <div className="p-4 md:p-6 lg:p-8 flex flex-col h-[calc(100vh-90px)] md:h-[calc(100vh-40px)] animate-in fade-in duration-500 w-full overflow-hidden">
       <header className="flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-4 mb-4 md:mb-8 shrink-0">
         <div>
-          <h1 className="text-3xl md:text-4xl font-matcha font-bold text-slate-900 tracking-tight">Dashboard</h1>
+          <h1 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">Dashboard</h1>
           <p className="text-xs md:text-sm text-slate-500 mt-1">Pantau kondisi kesehatan seluruh anak secara bersamaan.</p>
         </div>
         <div className="flex gap-2">
@@ -70,7 +70,7 @@ export default function DashboardOverview() {
         <div className="xl:hidden mb-4 shrink-0 px-1 animate-in slide-in-from-top-2 duration-300">
           <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5 block">Pilih Profil Anak</label>
           <div className="relative">
-            <select 
+            <select
               className="w-full appearance-none bg-white/80 backdrop-blur-md border border-slate-200 rounded-xl px-4 py-3 text-sm font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-primary-500 shadow-sm transition-shadow"
               value={selectedChildId || ""}
               onChange={(e) => setSelectedChildId(e.target.value)}
@@ -189,9 +189,8 @@ export default function DashboardOverview() {
                             <span className="text-4xl font-extrabold text-slate-900">{latestLog.temperature}</span>
                             <span className="text-xl font-bold text-slate-400 mb-1">°C</span>
                           </div>
-                          <p className={`text-[10px] uppercase tracking-wider font-bold ${
-                            latestLog.indication.includes("Demam") ? "text-red-600" : "text-green-600"
-                          }`}>
+                          <p className={`text-[10px] uppercase tracking-wider font-bold ${latestLog.indication.includes("Demam") ? "text-red-600" : "text-green-600"
+                            }`}>
                             {latestLog.indication} • {latestLog.time}
                           </p>
                         </div>
@@ -231,20 +230,18 @@ export default function DashboardOverview() {
                                     </h4>
                                     <div className="flex items-center gap-1.5 shrink-0">
                                       {/* Per-item given count / frequency */}
-                                      <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
-                                        (med.givenCount ?? 0) >= (med.frequency ?? 1)
+                                      <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${(med.givenCount ?? 0) >= (med.frequency ?? 1)
                                           ? 'bg-green-100 text-green-700'
                                           : (med.givenCount ?? 0) > 0
-                                          ? 'bg-blue-100 text-blue-700'
-                                          : 'bg-slate-100 text-slate-400'
-                                      }`}>
+                                            ? 'bg-blue-100 text-blue-700'
+                                            : 'bg-slate-100 text-slate-400'
+                                        }`}>
                                         {med.givenCount ?? 0}x / {med.frequency ?? 1}x
                                       </span>
-                                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-lg ${
-                                        med.status === 'Diberikan' ? 'bg-green-100 text-green-700' :
-                                        med.status === 'Dilewati' ? 'bg-red-100 text-red-700' :
-                                        'bg-blue-100 text-blue-700'
-                                      }`}>
+                                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-lg ${med.status === 'Diberikan' ? 'bg-green-100 text-green-700' :
+                                          med.status === 'Dilewati' ? 'bg-red-100 text-red-700' :
+                                            'bg-blue-100 text-blue-700'
+                                        }`}>
                                         {med.scheduleTime}
                                       </span>
                                     </div>
@@ -252,11 +249,10 @@ export default function DashboardOverview() {
                                   {med.type && (
                                     <p className="text-[10px] text-slate-500">Jenis: {med.type}</p>
                                   )}
-                                  <p className={`text-[10px] font-semibold ${
-                                    med.status === 'Diberikan' ? 'text-green-600' :
-                                    med.status === 'Dilewati' ? 'text-red-500' :
-                                    'text-blue-500'
-                                  }`}>
+                                  <p className={`text-[10px] font-semibold ${med.status === 'Diberikan' ? 'text-green-600' :
+                                      med.status === 'Dilewati' ? 'text-red-500' :
+                                        'text-blue-500'
+                                    }`}>
                                     {med.status} • {med.dosage}
                                   </p>
                                   {med.instructions && (
@@ -372,18 +368,17 @@ export default function DashboardOverview() {
                             <p className="text-[11px] text-slate-500 font-medium">Pemantauan suhu tubuh</p>
                           </div>
                         </div>
-                        
+
                         {childTempLogs.length > 0 ? (
                           <div className="space-y-3 flex-1 max-h-[260px] overflow-y-auto pr-1 hide-scrollbar">
                             {childTempLogs.map(log => (
                               <div key={log.id} className="flex flex-col p-3.5 bg-white rounded-2xl border border-slate-100/80 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden pl-4">
                                 <div className={`absolute left-0 top-0 bottom-0 w-1.5 ${log.indication.includes('Demam') ? 'bg-rose-500' : 'bg-emerald-500'}`}></div>
-                                
+
                                 <div className="flex justify-between items-center w-full mb-1.5 gap-2">
                                   <span className="text-xl font-black text-slate-800 leading-none">{log.temperature}°C</span>
-                                  <span className={`text-[10px] font-bold px-2.5 py-1 rounded-md whitespace-nowrap ${
-                                    log.indication.includes('Demam') ? 'bg-rose-100 text-rose-700' : 'bg-emerald-100 text-emerald-700'
-                                  }`}>
+                                  <span className={`text-[10px] font-bold px-2.5 py-1 rounded-md whitespace-nowrap ${log.indication.includes('Demam') ? 'bg-rose-100 text-rose-700' : 'bg-emerald-100 text-emerald-700'
+                                    }`}>
                                     {log.indication}
                                   </span>
                                 </div>
@@ -415,22 +410,20 @@ export default function DashboardOverview() {
                           <div className="space-y-3 flex-1 max-h-[260px] overflow-y-auto pr-1 hide-scrollbar">
                             {childSymptomLogs.map(log => (
                               <div key={log.id} className="flex flex-col p-3.5 bg-white rounded-2xl border border-slate-100/80 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden pl-4">
-                                <div className={`absolute left-0 top-0 bottom-0 w-1.5 ${
-                                    log.severity === 'Berat' ? 'bg-red-500' :
+                                <div className={`absolute left-0 top-0 bottom-0 w-1.5 ${log.severity === 'Berat' ? 'bg-red-500' :
                                     log.severity === 'Sedang' ? 'bg-amber-500' :
-                                    'bg-emerald-500'
+                                      'bg-emerald-500'
                                   }`}></div>
-                                
+
                                 <div className="flex flex-col gap-2 mb-2 w-full">
                                   <span className="text-[15px] font-bold text-slate-800 leading-snug break-words w-full">
                                     {log.symptom}
                                   </span>
                                   <div className="flex flex-wrap items-center gap-2">
-                                    <span className={`text-[9px] font-bold px-2 py-1 rounded-md uppercase tracking-wider ${
-                                      log.severity === 'Berat' ? 'bg-red-50 text-red-700' :
-                                      log.severity === 'Sedang' ? 'bg-amber-50 text-amber-700' :
-                                      'bg-emerald-50 text-emerald-700'
-                                    }`}>
+                                    <span className={`text-[9px] font-bold px-2 py-1 rounded-md uppercase tracking-wider ${log.severity === 'Berat' ? 'bg-red-50 text-red-700' :
+                                        log.severity === 'Sedang' ? 'bg-amber-50 text-amber-700' :
+                                          'bg-emerald-50 text-emerald-700'
+                                      }`}>
                                       {log.severity}
                                     </span>
                                     <span className="text-[10px] text-slate-500 font-semibold shrink-0 bg-slate-50 px-2 py-1 rounded-md border border-slate-100 flex items-center gap-1">
