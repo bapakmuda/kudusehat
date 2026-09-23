@@ -40,7 +40,7 @@ export default function Sidebar() {
         <div className="w-14 h-14 shrink-0">
           <img src="/logo.png" alt="Logo KuduSehat" className="w-full h-full object-contain" />
         </div>
-        <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-700 ">
+        <span className="text-2xl font-matcha font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-700 ">
           KuduSehat
         </span>
       </div>
