@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Send, Bot, User, ShieldAlert, Sparkles, AlertCircle, Stethoscope } from "lucide-react";
+import { Send, Bot, User, ShieldAlert, Sparkles, AlertCircle, Stethoscope, ChevronDown } from "lucide-react";
 import { useFamily, ChatMessage } from "@/context/FamilyContext";
 import DateTag from "@/components/ui/DateTag";
 import Link from "next/link";
@@ -106,24 +106,43 @@ export default function ConsultationPage() {
         </div>
 
         {/* Child Selector */}
-        <div className="bg-white/80 backdrop-blur-md rounded-2xl p-2 md:p-1 border border-slate-200/50 shadow-sm flex items-center gap-2 overflow-x-auto w-full md:w-auto">
+        <div className="bg-white/80 backdrop-blur-md rounded-2xl p-4 md:p-2 border border-slate-200/50 shadow-sm flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4 w-full md:w-auto">
           {children.length === 0 ? (
             <span className="text-sm text-slate-400 italic px-4 py-1.5">Belum ada profil anak</span>
           ) : (
-            children.map(child => (
-              <button
-                key={child.id}
-                type="button"
-                onClick={() => setActiveChildId(child.id)}
-                className={`shrink-0 px-4 py-1.5 rounded-xl text-sm font-bold transition-all ${
-                  activeChildId === child.id 
-                    ? "bg-primary-600 text-white shadow-md shadow-primary-500/20" 
-                    : "bg-transparent text-slate-600 hover:bg-slate-50"
-                }`}
-              >
-                {child.name}
-              </button>
-            ))
+            <>
+              {/* Mobile Dropdown */}
+              <div className="relative w-full md:hidden">
+                <select 
+                  className="w-full appearance-none bg-white/80 backdrop-blur-md border border-slate-200 rounded-xl px-4 py-3 text-sm font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-primary-500 shadow-sm transition-shadow"
+                  value={activeChildId || ""}
+                  onChange={(e) => setActiveChildId(e.target.value)}
+                >
+                  {children.map(c => (
+                    <option key={c.id} value={c.id}>{c.name}</option>
+                  ))}
+                </select>
+                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+              </div>
+
+              {/* Desktop Buttons */}
+              <div className="hidden md:flex gap-2 overflow-x-auto pb-2 md:pb-0 w-full">
+                {children.map(child => (
+                  <button
+                    key={child.id}
+                    type="button"
+                    onClick={() => setActiveChildId(child.id)}
+                    className={`shrink-0 px-4 py-1.5 rounded-xl text-sm font-bold transition-all ${
+                      activeChildId === child.id 
+                        ? "bg-primary-600 text-white shadow-md shadow-primary-500/20" 
+                        : "bg-transparent text-slate-600 hover:bg-slate-50"
+                    }`}
+                  >
+                    {child.name}
+                  </button>
+                ))}
+              </div>
+            </>
           )}
         </div>
       </div>

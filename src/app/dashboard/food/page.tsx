@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Utensils, AlertTriangle, Info, Clock, Plus, Trash2, X } from "lucide-react";
+import { Utensils, AlertTriangle, Info, Clock, Plus, Trash2, X, ChevronDown } from "lucide-react";
 import { useFamily, FoodLog, SymptomLog } from "@/context/FamilyContext";
 import DateTag from "@/components/ui/DateTag";
 
@@ -98,28 +98,46 @@ export default function FoodConsumptionPage() {
 
       {/* Child Selector */}
       <div className="bg-white/80 backdrop-blur-md rounded-2xl p-4 border border-slate-200/50 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
-        <div className="flex items-center gap-4 w-full md:w-auto">
-          <label className="font-bold text-slate-700 shrink-0">Pilih Anak:</label>
-          <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 snap-x w-full">
-            {children.length === 0 ? (
-              <span className="text-sm text-slate-400 italic py-2">Belum ada profil anak</span>
-            ) : (
-              children.map(child => (
-                <button
-                  key={child.id}
-                  type="button"
-                  onClick={() => setActiveChildId(child.id)}
-                  className={`snap-start shrink-0 px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
-                    activeChildId === child.id 
-                      ? "bg-orange-500 text-white shadow-md shadow-orange-500/20" 
-                      : "bg-white text-slate-600 hover:bg-slate-50 border border-slate-200"
-                  }`}
+        <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 w-full">
+          <label className="font-bold text-slate-700 shrink-0 text-sm md:text-base">Pilih Anak:</label>
+          
+          {children.length === 0 ? (
+            <span className="text-sm text-slate-400 italic py-2">Belum ada profil anak</span>
+          ) : (
+            <>
+              {/* Mobile Dropdown */}
+              <div className="relative w-full md:hidden">
+                <select 
+                  className="w-full appearance-none bg-white/80 backdrop-blur-md border border-slate-200 rounded-xl px-4 py-3 text-sm font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-sm"
+                  value={activeChildId || ""}
+                  onChange={(e) => setActiveChildId(e.target.value)}
                 >
-                  {child.name}
-                </button>
-              ))
-            )}
-          </div>
+                  {children.map(c => (
+                    <option key={c.id} value={c.id}>{c.name}</option>
+                  ))}
+                </select>
+                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+              </div>
+
+              {/* Desktop Buttons */}
+              <div className="hidden md:flex gap-2 w-full">
+                {children.map(child => (
+                  <button
+                    key={child.id}
+                    type="button"
+                    onClick={() => setActiveChildId(child.id)}
+                    className={`shrink-0 px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
+                      activeChildId === child.id 
+                        ? "bg-orange-500 text-white shadow-md shadow-orange-500/20" 
+                        : "bg-white text-slate-600 hover:bg-slate-50 border border-slate-200"
+                    }`}
+                  >
+                    {child.name}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
 

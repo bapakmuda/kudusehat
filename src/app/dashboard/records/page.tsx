@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Activity, Thermometer, Stethoscope, AlertCircle, Save, Calendar, Clock, Plus, Trash2 } from "lucide-react";
+import { Activity, Thermometer, Stethoscope, AlertCircle, Save, Calendar, Clock, Plus, Trash2, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { useFamily, TemperatureLog, SymptomLog } from "@/context/FamilyContext";
 import DateTag from "@/components/ui/DateTag";
@@ -137,24 +137,46 @@ export default function HealthRecordsPage() {
 
       {/* Child Selector */}
       <div className="bg-white/80 backdrop-blur-md rounded-2xl p-4 border border-slate-200/50 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <div className="flex items-center gap-4 w-full md:w-auto">
-          <label className="font-bold text-slate-700 shrink-0">Pilih Anak:</label>
-          <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0 snap-x w-full">
-            {children.map(child => (
-              <button
-                key={child.id}
-                type="button"
-                onClick={() => setActiveChildId(child.id)}
-                className={`snap-start px-4 py-2 rounded-xl text-sm font-bold transition-all shrink-0 ${
-                  activeChildId === child.id 
-                    ? "bg-primary-600 text-white shadow-md shadow-primary-500/20" 
-                    : "bg-white text-slate-600 hover:bg-slate-50 border border-slate-200"
-                }`}
-              >
-                {child.name}
-              </button>
-            ))}
-          </div>
+        <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 w-full">
+          <label className="font-bold text-slate-700 shrink-0 text-sm md:text-base">Pilih Anak:</label>
+          
+          {children.length === 0 ? (
+            <span className="text-sm text-slate-400 italic py-2">Belum ada profil anak</span>
+          ) : (
+            <>
+              {/* Mobile Dropdown */}
+              <div className="relative w-full md:hidden">
+                <select 
+                  className="w-full appearance-none bg-white/80 backdrop-blur-md border border-slate-200 rounded-xl px-4 py-3 text-sm font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-primary-500 shadow-sm transition-shadow"
+                  value={activeChildId || ""}
+                  onChange={(e) => setActiveChildId(e.target.value)}
+                >
+                  {children.map(c => (
+                    <option key={c.id} value={c.id}>{c.name}</option>
+                  ))}
+                </select>
+                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+              </div>
+
+              {/* Desktop Buttons */}
+              <div className="hidden md:flex gap-2 overflow-x-auto pb-2 md:pb-0 w-full">
+                {children.map(child => (
+                  <button
+                    key={child.id}
+                    type="button"
+                    onClick={() => setActiveChildId(child.id)}
+                    className={`shrink-0 px-4 py-2 rounded-xl text-sm font-bold transition-all ${
+                      activeChildId === child.id 
+                        ? "bg-primary-600 text-white shadow-md shadow-primary-500/20" 
+                        : "bg-white text-slate-600 hover:bg-slate-50 border border-slate-200"
+                    }`}
+                  >
+                    {child.name}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
         </div>
         
         <Link href="/dashboard/temperature" className="shrink-0 inline-flex items-center justify-center px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-sm font-bold transition-colors shadow-sm w-full md:w-auto">
