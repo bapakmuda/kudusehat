@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npx prisma db push && npm run seed && next build",
+    "build": "echo \"DATABASE_URL=file:./kidscare.db\" > .env && npx prisma db push && npm run seed && next build",
     "seed": "node prisma/seed.js",
     "start": "next start",
     "lint": "eslint",
