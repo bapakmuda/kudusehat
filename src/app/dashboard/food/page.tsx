@@ -176,7 +176,7 @@ export default function FoodConsumptionPage() {
                     type="time" 
                     value={time}
                     onChange={(e) => setTime(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 rounded-xl px-4 py-3 text-slate-900 transition-all outline-none"
+                    className="w-full max-w-full min-w-0 appearance-none block bg-slate-50 border border-slate-200 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 rounded-xl px-4 py-3 text-slate-900 transition-all outline-none"
                   />
                 </div>
                 

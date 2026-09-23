@@ -247,7 +247,7 @@ export default function MedicationsPage() {
                     required
                     value={scheduleTime}
                     onChange={(e) => setScheduleTime(e.target.value)}
-                    className="appearance-none block w-full pl-9 pr-3 py-3 border border-slate-200 rounded-xl shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm bg-white/50"
+                    className="appearance-none block min-w-0 max-w-full w-full pl-9 pr-3 py-3 border border-slate-200 rounded-xl shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm bg-white/50"
                   />
                 </div>
               </div>
